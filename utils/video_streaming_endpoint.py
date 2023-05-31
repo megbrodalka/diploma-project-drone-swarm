@@ -9,13 +9,16 @@ import numpy as np
 app = FastAPI()
 drone = tellopy.Tello()
 
+
 # Start video streaming in separate thread
 def start_drone_stream():
     drone.connect()
     drone.start_video()
 
+
 streaming_thread = threading.Thread(target=start_drone_stream)
 streaming_thread.start()
+
 
 @app.get("/")
 async def stream_video():
