@@ -9,6 +9,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 templates = Jinja2Templates(directory="templates")
 
-@app.get('/drones')
+
+@app.get('/api/swarm')
 def index():
-    return FileResponse("static/templates/index.html")
+    return FileResponse("static/templates/dashboard.html")
