@@ -1,15 +1,37 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import DroneInfo  from './DroneInfo';
-import droneList from './DroneList';
+import axios from 'axios';
+
+const port = "http://127.0.0.1:8001"
 
 const ViewAllDrones = () => {
-    const [drones, setDrones] = useState(droneList);
+    // Variable called drones, and a setter function called setDrones
+    // The initial value of drones is an empty array
+    // The useState returns an array with two elements, drones and setDrones
+    const [drones, setDrones] = useState([]);
 
-    const handleDelete = (id) => {
-        const updatedDrones = drones.filter(drone => drone.id !== id);
-        setDrones(updatedDrones);
-    };
+    // Used to fetch the drone data and update the drones state
+    useEffect(() => {
+        fetchDrones();
+    }, []);
 
+    const fetchDrones = async () => {
+        try {
+            const response = await axios.get(`${port}/drones`);
+            setDrones(response.data);
+        } catch (error) {
+            console.error("Error fetching drones: ", error);
+        }
+    }
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`${port}/drones/${id}`);
+            setDrones((prevDrones) => prevDrones.filter((drone) => drone.id !== id));
+        } catch (error) {
+            console.error("Error deleting drone: ", error);
+        }
+    }
 
     return (
         <div className="m-8">
@@ -28,7 +50,6 @@ const ViewAllDrones = () => {
                     {drones.map((drone) => (
                         <DroneInfo key={drone.id} drone={drone} onDelete={handleDelete} />
                     ))}
-
                 </tbody>
 
             </table>

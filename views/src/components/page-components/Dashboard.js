@@ -3,7 +3,9 @@ import ViewAllDrones from "../small-components/ViewAllDrones";
 
 const Dashboard = () => {
     return (
-        <ViewAllDrones/>
+        <div>
+            <ViewAllDrones/>
+        </div>
     )
 }
 

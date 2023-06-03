@@ -1,8 +1,13 @@
 import React from 'react'
+import AddDrone from "../small-components/AddDrone";
 
 const Settings = () => {
     return (
-        <h1>Settings</h1>
+        <div className="w-full h-auto">
+            <AddDrone/>
+
+        </div>
+
     )
 }
 
