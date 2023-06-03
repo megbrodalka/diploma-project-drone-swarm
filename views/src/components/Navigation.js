@@ -13,7 +13,7 @@ const Navigation = () => {
                 <a href='#' className='text-white p-2 m-2 text-gray-200 font-medium hover:bg-[#1d2430] rounded-md'>Settings</a>
             </div>
             <button className='mx-5 p-3 hover:scale-110'>
-                <img src={bell} alt='Bell' className='h-auto w-6'/>
+                <img src={bell} alt='Bell' className='h-auto w-5'/>
             </button>
         </nav>
     );
