@@ -1,8 +1,8 @@
 import React from 'react'
-import logo from '../images/drone-logo.png'
+import logo from '../../images/drone-logo.png'
 import Online from './Online'
 import Offline from './Offline'
-import bin from "../images/bin.png"
+import bin from "../../images/bin.png"
 
 const DroneInfo = ({ drone, onDelete }) => {
     const { name, ip, status, battery } = drone;
