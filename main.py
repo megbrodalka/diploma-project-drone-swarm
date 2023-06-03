@@ -12,4 +12,4 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get('/api/swarm')
 def index():
-    return FileResponse("static/templates/dashboard.html")
+    return FileResponse("static/templates/index.html")
