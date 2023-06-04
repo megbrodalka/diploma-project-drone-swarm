@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import axios from "axios";
 
-const AddDrone = () => {
+const AddDrone = ({ onAddDrone }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [name, setName] = useState('');
@@ -18,18 +19,20 @@ const AddDrone = () => {
     e.preventDefault();
 
     if (name.trim() === '') {
-      setError("The name field must not be empty");
+      setError("The name field must not be empty")
     } else if (!validateIP(ip)) {
-      setError("Invalid IP format");
+      setError("Invalid IP format")
     } else {
-      setError('');
+      setError('')
+      onAddDrone(name.toString(), ip.toString())
+      setIsOpen(false)
     }
   }
 
   // Chat GPT
   const validateIP = (value) => {
     const ipFormat = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
-    return ipFormat.test(value);
+    return ipFormat.test(value)
   };
 
   return (
@@ -40,7 +43,7 @@ const AddDrone = () => {
         Add
       </button>
 
-      <Popup open={isOpen} onClose={togglePopup}>
+      <Popup open={isOpen}>
         <div className="popup p-4">
           <h2 className="my-2 font-semibold text-gray-600">Add Drone</h2>
           <form onSubmit={handleSubmit}>

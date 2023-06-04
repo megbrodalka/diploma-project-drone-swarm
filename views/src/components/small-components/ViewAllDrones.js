@@ -25,7 +25,18 @@ const ViewAllDrones = () => {
         }
     }
 
-    const handleDelete = async (id) => {
+    const addDrone = async (name, ip) => {
+        try {
+            const data = {name: name, ip: ip};
+            const response = await axios.post(`${port}/drones`, data);
+            const newDrone = response.data;
+            setDrones((prevDrones) => [...prevDrones, newDrone]);
+        } catch (error) {
+            console.error("Error adding drone: ", error);
+        }
+    }
+
+    const deleteDrone = async (id) => {
         try {
             await axios.delete(`${port}/drones/${id}`);
             setDrones((prevDrones) => prevDrones.filter((drone) => drone.id !== id));
@@ -38,7 +49,7 @@ const ViewAllDrones = () => {
         <div className="m-8">
             <div className="flex items-center justify-between mb-4">
                 <h1 className="font-semibold text-xl text-gray-600">Dashboard</h1>
-                <AddDrone/>
+                <AddDrone onAddDrone={addDrone}/>
             </div>
 
             <table className="w-full table-auto">
@@ -54,7 +65,7 @@ const ViewAllDrones = () => {
 
                 <tbody>
                     {drones.map((drone) => (
-                        <DroneInfo key={drone.id} drone={drone} onDelete={handleDelete} />
+                        <DroneInfo key={drone.id} drone={drone} onDelete={deleteDrone} />
                     ))}
                 </tbody>
 
