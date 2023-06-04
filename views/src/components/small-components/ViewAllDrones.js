@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import DroneInfo  from './DroneInfo';
 import axios from 'axios';
+import AddDrone from "./AddDrone";
 
-const port = "http://127.0.0.1:8001"
+const port = "http://127.0.0.1:8000"
 
 const ViewAllDrones = () => {
     // Variable called drones, and a setter function called setDrones
@@ -35,6 +36,11 @@ const ViewAllDrones = () => {
 
     return (
         <div className="m-8">
+            <div className="flex items-center justify-between mb-4">
+                <h1 className="font-semibold text-xl text-gray-600">Dashboard</h1>
+                <AddDrone/>
+            </div>
+
             <table className="w-full table-auto">
 
                 <thead>

@@ -1,26 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const AddDrone = () => {
-    return (
-        <div className="w-auto h-auto m-10">
-            <h1 className="m-4 bg-gray-100 border-b border-gray-300 py-2 px-4 text-gray-400 rounded">Add Drone</h1>
+  const [isOpen, setIsOpen] = useState(false);
 
-            <form className="m-4 p-4 bg-gray-100 rounded">
+  const [name, setName] = useState('');
+  const [ip, setIp] = useState('');
 
-                <div className="mb-4">
-                    <label htmlFor="name" className="block">Name:</label>
-                    <input type="text" id="name" name="name" className="border border-gray-300 rounded-md p-2"/>
-                </div>
+  const [error, setError] = useState('');
 
-                <div className="mb-4">
-                    <label htmlFor="ip" className="block">IP Address:</label>
-                    <input type="text" id="ip" name="ip" className="border border-gray-300 rounded-md p-2"/>
-                </div>
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
 
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Add Drone</button>
-            </form>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (name.trim() === '') {
+      setError("The name field must not be empty");
+    } else if (!validateIP(ip)) {
+      setError("Invalid IP format");
+    } else {
+      setError('');
+    }
+  }
+
+  // Chat GPT
+  const validateIP = (value) => {
+    const ipFormat = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$|^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+    return ipFormat.test(value);
+  };
+
+  return (
+    <div>
+      <button
+        className="bg-[#6466f0] text-white py-1 px-5 rounded-lg float-right text-sm hover:scale-105"
+        onClick={togglePopup}>
+        Add
+      </button>
+
+      <Popup open={isOpen} onClose={togglePopup}>
+        <div className="popup p-4">
+          <h2 className="my-2 font-semibold text-gray-600">Add Drone</h2>
+          <form onSubmit={handleSubmit}>
+
+            <div className="flex flex-col">
+              <label htmlFor="name" className="bg-gray-100 border-b border-gray-300 p-1 text-xs text-gray-400 font-medium">
+                NAME
+              </label>
+
+              <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)}/>
+            </div>
+
+            <div className="flex flex-col">
+
+              <label htmlFor="ip" className="bg-gray-100 border-b border-gray-300 p-1 text-xs text-gray-400 font-medium">
+                IP ADDRESS
+              </label>
+
+              <input type="text" id="ip" name="ip" value={ip} onChange={(e) => setIp(e.target.value)}/>
+
+              {error && <small className="py-1 text-red-500 text-xs font-semibold">{error}</small>}
+            </div>
+
+            <button type="submit" className=" mt-2 bg-[#6466f0] text-white py-1 px-5 rounded-lg text-sm hover:scale-105">Add</button>
+
+          </form>
         </div>
-    );
-}
+      </Popup>
+    </div>
+  );
+};
 
 export default AddDrone;
+
+
