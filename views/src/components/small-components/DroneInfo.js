@@ -1,7 +1,6 @@
 import React from 'react'
 import logo from '../../images/drone-logo.png'
-import Online from './Online'
-import Offline from './Offline'
+import Status from './Status'
 import bin from "../../images/bin.png"
 
 const DroneInfo = ({ drone, onDelete }) => {
@@ -10,14 +9,6 @@ const DroneInfo = ({ drone, onDelete }) => {
     const handleDelete = () => {
         onDelete(drone.id);
     };
-
-    const getStatusComponent = () => {
-        if (status === 'Online') {
-            return <Online/>
-        } else if (status === 'Offline') {
-            return <Offline/>
-        }
-    }
 
     return (
         <tr className='border-b border-gray-200'>
@@ -30,7 +21,7 @@ const DroneInfo = ({ drone, onDelete }) => {
               </div>
             </div>
           </td>
-          <td className="py-2 px-4">{getStatusComponent()}</td>
+          <td className="py-2 px-4"><Status status={status}/></td>
           <td className="py-2 px-4 text-gray-500 font-semibold">{battery}</td>
           <td className="py-2 px-4">
               <button className='drone-delete-button hover:scale-110' onClick={handleDelete}>

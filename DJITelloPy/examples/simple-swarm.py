@@ -7,6 +7,7 @@ swarm = TelloSwarm.fromIps([
 ])
 
 swarm.connect()
+
 swarm.takeoff()
 
 # run in parallel on all tellos

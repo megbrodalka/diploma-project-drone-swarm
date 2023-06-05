@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import DroneInfo  from './DroneInfo';
 import axios from 'axios';
 import AddDrone from "./AddDrone";
+import Connect from "./Connect";
 
 const port = "http://127.0.0.1:8000"
 
@@ -18,7 +19,7 @@ const ViewAllDrones = () => {
 
     const fetchDrones = async () => {
         try {
-            const response = await axios.get(`${port}/drones`);
+            const response = await axios.get(`${port}/api/drones`);
             setDrones(response.data);
         } catch (error) {
             console.error("Error fetching drones: ", error);
@@ -28,7 +29,7 @@ const ViewAllDrones = () => {
     const addDrone = async (name, ip) => {
         try {
             const data = {name: name, ip: ip};
-            const response = await axios.post(`${port}/drones`, data);
+            const response = await axios.post(`${port}/api/drones`, data);
             const newDrone = response.data;
             setDrones((prevDrones) => [...prevDrones, newDrone]);
         } catch (error) {
@@ -38,7 +39,7 @@ const ViewAllDrones = () => {
 
     const deleteDrone = async (id) => {
         try {
-            await axios.delete(`${port}/drones/${id}`);
+            await axios.delete(`${port}/api/drones/${id}`);
             setDrones((prevDrones) => prevDrones.filter((drone) => drone.id !== id));
         } catch (error) {
             console.error("Error deleting drone: ", error);
@@ -49,7 +50,12 @@ const ViewAllDrones = () => {
         <div className="m-8">
             <div className="flex items-center justify-between mb-4">
                 <h1 className="font-semibold text-xl text-gray-600">Dashboard</h1>
-                <AddDrone onAddDrone={addDrone}/>
+
+                <div className="flex items-center ">
+                    <Connect drones={drones} port={port}/>
+                    <AddDrone onAddDrone={addDrone}/>
+                </div>
+
             </div>
 
             <table className="w-full table-auto">
