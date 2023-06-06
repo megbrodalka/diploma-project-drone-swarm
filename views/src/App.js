@@ -7,23 +7,24 @@ import Dashboard from "./components/page-components/Dashboard";
 import Control from "./components/page-components/Control";
 import LiveFeed from "./components/page-components/LiveFeed";
 import Settings from "./components/page-components/Settings";
+import {ThemeProvider} from "./components/small-components/theme";
 
 
 const App = () => {
     return (
-        <Router>
-          <div>
-            <Navigation />
-            <div className="bg-gray-200 w-full h-screen hidden"></div>
-
-            <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/control" element={<Control />} />
-              <Route path="/livefeed" element={<LiveFeed />} />
-              <Route path="/settings" element={<Settings />} />
-            </Routes>
-          </div>
-    </Router>
+        <ThemeProvider>
+            <Router>
+              <div className="w-screen h-screen dark:bg-[#333333]">
+                <Navigation />
+                <Routes>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/control" element={<Control />} />
+                  <Route path="/livefeed" element={<LiveFeed />} />
+                  <Route path="/settings" element={<Settings />} />
+                </Routes>
+              </div>
+            </Router>
+        </ThemeProvider>
     )
 }
 
