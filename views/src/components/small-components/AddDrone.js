@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import axios from "axios";
 
 const AddDrone = ({ onAddDrone }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,25 +43,29 @@ const AddDrone = ({ onAddDrone }) => {
       </button>
 
       <Popup open={isOpen}>
-        <div className="popup p-4">
-          <h2 className="my-2 font-semibold text-gray-600">Add Drone</h2>
+        <div className="popup p-4 dark:bg-neutral-700">
+          <h2 className="my-2 font-semibold text-gray-600 dark:text-white">Add Drone</h2>
           <form onSubmit={handleSubmit}>
 
             <div className="flex flex-col">
-              <label htmlFor="name" className="bg-gray-100 border-b border-gray-300 p-1 text-xs text-gray-400 font-medium">
+              <label htmlFor="name" className="bg-gray-100 border-b border-gray-300 p-1 text-xs text-gray-400 font-medium
+              dark:bg-neutral-600 dark:border-neutral-800">
                 NAME
               </label>
 
-              <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)}/>
+              <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)}
+              className="dark:bg-neutral-700 dark:text-white"/>
             </div>
 
             <div className="flex flex-col">
 
-              <label htmlFor="ip" className="bg-gray-100 border-b border-gray-300 p-1 text-xs text-gray-400 font-medium">
+              <label htmlFor="ip" className="bg-gray-100 border-b border-gray-300 p-1 text-xs text-gray-400 font-medium
+              dark:bg-neutral-600 dark:border-neutral-800">
                 IP ADDRESS
               </label>
 
-              <input type="text" id="ip" name="ip" value={ip} onChange={(e) => setIp(e.target.value)}/>
+              <input type="text" id="ip" name="ip" value={ip} onChange={(e) => setIp(e.target.value)}
+              className="dark:bg-neutral-700 dark:text-white"/>
 
               {error && <small className="py-1 text-red-500 text-xs font-semibold">{error}</small>}
             </div>

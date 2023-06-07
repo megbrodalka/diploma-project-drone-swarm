@@ -7,14 +7,14 @@ import Dashboard from "./components/page-components/Dashboard";
 import Control from "./components/page-components/Control";
 import LiveFeed from "./components/page-components/LiveFeed";
 import Settings from "./components/page-components/Settings";
-import {ThemeProvider} from "./components/small-components/theme";
+import {ThemeProvider} from "./components/small-components/Theme";
 
 
 const App = () => {
     return (
         <ThemeProvider>
             <Router>
-              <div className="w-screen h-screen dark:bg-[#333333]">
+              <div className="w-screen h-screen dark:bg-neutral-700">
                 <Navigation />
                 <Routes>
                   <Route path="/dashboard" element={<Dashboard />} />

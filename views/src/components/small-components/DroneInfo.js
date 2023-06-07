@@ -11,18 +11,18 @@ const DroneInfo = ({ drone, onDelete }) => {
     };
 
     return (
-        <tr className='border-b border-gray-200'>
+        <tr className='border-b border-gray-200 dark:border-neutral-800'>
           <td className="py-2 px-4">
             <div className="flex items-center">
               <img src={logo} alt="Drone" className="w-8 h-auto mr-3" />
               <div className="flex flex-col">
-                <span className="text-black font-semibold">{name}</span>
-                <span className="text-gray-400 ">{ip}</span>
+                <span className="text-black font-semibold dark:text-white">{name}</span>
+                <span className="text-gray-400 dark:text-gray-400">{ip}</span>
               </div>
             </div>
           </td>
           <td className="py-2 px-4"><Status status={status}/></td>
-          <td className="py-2 px-4 text-gray-500 font-semibold">{battery}</td>
+          <td className="py-2 px-4 text-gray-500 font-semibold dark:text-stone-300">{battery}</td>
           <td className="py-2 px-4">
               <button className='drone-delete-button hover:scale-110' onClick={handleDelete}>
                   <img src={bin} alt='Delete' className='h-auto w-5'/>
