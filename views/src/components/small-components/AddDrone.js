@@ -37,7 +37,7 @@ const AddDrone = ({ onAddDrone }) => {
   return (
     <div>
       <button
-        className="bg-[#6466f0] text-white py-1 px-5 rounded-lg float-right text-sm hover:scale-105"
+        className="bg-blue-700 text-white mx-2 px-5 py-1 rounded-lg float-right text-sm hover:bg-blue-800"
         onClick={togglePopup}>
         Add
       </button>

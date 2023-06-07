@@ -46,10 +46,12 @@ const ViewAllDrones = () => {
         }
     }
 
+    const tableCategoryStyle = "py-2 px-4 text-left text-xs text-stone-700 font-bold w-auto"
+
     return (
         <div className="m-8">
             <div className="flex items-center justify-between mb-4">
-                <h1 className="font-semibold text-xl text-gray-600 dark:text-white">Dashboard</h1>
+                <h1 className="font-semibold text-xl text-stone-700 dark:text-white">Dashboard</h1>
 
                 <div className="flex items-center ">
                     <Connect drones={drones} port={port}/>
@@ -61,11 +63,11 @@ const ViewAllDrones = () => {
             <table className="w-full table-auto">
 
                 <thead>
-                  <tr className="bg-gray-100 border-b border-gray-300 dark:bg-neutral-600 dark:border-neutral-800">
-                    <th className="py-2 px-4 text-left text-xs text-gray-400 font-medium w-auto">NAME</th>
-                    <th className="py-2 px-4 text-left text-xs text-gray-400 font-medium w-auto">STATUS</th>
-                    <th className="py-2 px-4 text-left text-xs text-gray-400 font-medium w-auto">BATTERY</th>
-                    <th className="py-2 px-4 text-left text-xs text-gray-400 font-medium w-auto">DELETE</th>
+                  <tr className="bg-[#f9fafb] dark:bg-neutral-600 dark:border-neutral-800">
+                    <th className={tableCategoryStyle}>NAME</th>
+                    <th className={tableCategoryStyle}>STATUS</th>
+                    <th className={tableCategoryStyle}>BATTERY</th>
+                    <th></th>
                   </tr>
                 </thead>
 

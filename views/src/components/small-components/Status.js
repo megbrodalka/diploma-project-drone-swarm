@@ -1,14 +1,12 @@
 import React from 'react';
 
 const Status = ({ status }) => {
-    let statusClassName = 'status px-auto h-auto w-20 text-center rounded-2xl font-medium'
+    let statusClassName = 'status px-auto h-auto w-20 text-center rounded-lg'
 
     if (status === 'Flying') {
-        statusClassName += ' bg-green-300 bg-opacity-50 text-green-600' +
-            ' dark:text-green-950 dark:bg-opacity-90'
+        statusClassName += ' text-white bg-blue-700 hover:bg-blue-800';
     } else if (status === "Landed") {
-        statusClassName += ' bg-red-300 bg-opacity-50 text-red-600 ' +
-            'dark:bg-red-400 dark:text-red-950 '
+        statusClassName += ' border border-gray-200 hover:bg-gray-100 hover:text-blue-700';
     }
 
     return (

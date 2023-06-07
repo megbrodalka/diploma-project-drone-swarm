@@ -22,7 +22,7 @@ const DroneInfo = ({ drone, onDelete }) => {
             </div>
           </td>
           <td className="py-2 px-4"><Status status={status}/></td>
-          <td className="py-2 px-4 text-gray-500 font-semibold dark:text-stone-300">{battery}</td>
+          <td className="py-2 px-4 text-stone-700 dark:text-stone-300">{battery}</td>
           <td className="py-2 px-4">
               <button className='drone-delete-button hover:scale-110' onClick={handleDelete}>
                   <img src={bin} alt='Delete' className='h-auto w-5'/>

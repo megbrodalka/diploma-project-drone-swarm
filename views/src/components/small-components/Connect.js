@@ -18,7 +18,7 @@ const Connect = ({ drones, port }) => {
     }
 
     return (
-        <button className="bg-orange-400 text-white mx-2 py-1 px-5 rounded-lg float-right text-sm hover:scale-105"
+        <button className="text-gray-900 py-1 px-5 rounded-lg float-right text-sm border border-gray-200 hover:bg-gray-100 hover:text-blue-700"
         onClick={handleConnect}>
         Connect
         </button>
