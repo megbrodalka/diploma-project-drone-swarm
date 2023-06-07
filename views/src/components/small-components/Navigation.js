@@ -1,39 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/drone-logo.png';
-import bell from '../../images/bell.svg';
+import Notifications from "./Notifications";
 
 const Navigation = () => {
+    const navTextStyle = 'text-stone-700 p-1 m-2 text-gray-200 hover:text-blue-600 font-medium text-sm ' +
+        'dark:hover:bg-zinc-900';
+
     return (
-        <nav className='bg-[#232c3b] w-full flex items-center dark:bg-zinc-800'>
-            <img src={logo} alt='Drone' className='mx-5 p-3 hover:scale-110 h-auto w-16'/>
-            <div className='flex flex-grow justify-start'>
-                {/*<a href='views/src/components/small-components/Navigation#' className='text-white p-2 m-2 text-gray-200 font-medium hover:bg-[#1d2430] rounded-md'>Dashboard</a>*/}
+        <nav className='bg-white w-full flex flex-wrap items-center border-y border-gray-300 dark:bg-zinc-800'>
+            <div className='w-full lg:w-3/5 mx-auto flex items-center justify-between p-3'>
+              <div className='flex items-center'>
+                <img src={logo} alt='Drone' className='h-auto w-12 mr-2' />
+                <h1 className='text-xl font-medium text-stone-700'>InterSwarmX</h1>
+              </div>
 
-                <Link to="/dashboard" className='text-white p-2 m-2 text-gray-200 font-medium dark:hover:bg-zinc-900
-                 hover:bg-[#1d2430] rounded-md'>
-                    Dashboard
+              <div className='flex-grow'></div>
+
+              <div className='flex flex-wrap lg:flex-nowrap'>
+                <Link to='/dashboard' className={navTextStyle}>
+                  Dashboard
                 </Link>
 
-                <Link to="/control" className='text-white p-2 m-2 text-gray-200 font-medium dark:hover:bg-zinc-900
-                 hover:bg-[#1d2430] rounded-md'>
-                    Control
+                <Link to='/control' className={navTextStyle}>
+                  Control
                 </Link>
 
-                <Link to="/livefeed" className='text-white p-2 m-2 text-gray-200 font-medium dark:hover:bg-zinc-900
-                 hover:bg-[#1d2430] rounded-md'>
-                    Live Feed
+                <Link to='/livefeed' className={navTextStyle}>
+                  Live Feed
                 </Link>
 
-                <Link to="/settings" className='text-white p-2 m-2 text-gray-200 font-medium dark:hover:bg-zinc-900
-                 hover:bg-[#1d2430] rounded-md'>
-                    Settings
+                <Link to='/settings' className={navTextStyle}>
+                  Settings
                 </Link>
+              </div>
 
+              <Notifications />
             </div>
-            <button className='mx-5 p-3 hover:scale-110'>
-                <img src={bell} alt='Bell' className='h-auto w-5'/>
-            </button>
         </nav>
     );
 };
