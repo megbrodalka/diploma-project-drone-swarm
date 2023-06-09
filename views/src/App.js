@@ -14,7 +14,7 @@ const App = () => {
     return (
         <ThemeProvider>
             <Router>
-              <div className="w-screen h-screen dark:bg-neutral-700">
+              <div className="w-screen h-screen dark:bg-[#111827]">
                 <Navigation />
                 <Routes>
                   <Route path="/dashboard" element={<Dashboard />} />

@@ -46,7 +46,8 @@ const ViewAllDrones = () => {
         }
     }
 
-    const tableCategoryStyle = "py-2 px-4 text-left text-xs text-stone-700 font-bold w-auto"
+    const tableCategoryStyle = "py-2 px-4 text-left text-xs text-stone-700 font-bold w-auto " +
+        "dark:text-gray-400"
 
     return (
         <div className="m-8">
@@ -63,7 +64,7 @@ const ViewAllDrones = () => {
             <table className="w-full table-auto">
 
                 <thead>
-                  <tr className="bg-[#f9fafb] dark:bg-neutral-600 dark:border-neutral-800">
+                  <tr className="bg-[#f9fafb] dark:bg-[#374151]">
                     <th className={tableCategoryStyle}>NAME</th>
                     <th className={tableCategoryStyle}>STATUS</th>
                     <th className={tableCategoryStyle}>BATTERY</th>

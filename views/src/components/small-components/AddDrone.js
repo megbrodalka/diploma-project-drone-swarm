@@ -34,47 +34,65 @@ const AddDrone = ({ onAddDrone }) => {
     return ipFormat.test(value)
   };
 
+  const formLabelStyle = "text-sm mb-2 dark:text-gray-200"
+  const formInputStyle = "p-2 mb-3 bg-gray-100 rounded-lg border border-gray-300 placeholder:text-sm font-light" +
+      " placeholder:text-gray-400 text-sm" +
+      " dark:bg-gray-600 dark:border-gray-500 dark:caret-white dark:text-white"
+
   return (
     <div>
       <button
-        className="bg-blue-700 text-white mx-2 px-5 py-1 rounded-lg float-right text-sm hover:bg-blue-800"
+        className="bg-blue-700 text-white mx-2 px-5 py-1 rounded-lg float-right text-sm hover:bg-blue-800
+        dark:bg-[#1a56db] dark:hover:bg-blue-700"
         onClick={togglePopup}>
         Add
       </button>
 
-      <Popup open={isOpen}>
-        <div className="popup p-4 dark:bg-neutral-700">
-          <h2 className="my-2 font-semibold text-gray-600 dark:text-white">Add Drone</h2>
-          <form onSubmit={handleSubmit}>
+      {isOpen && (
+        <div className="bg-gray-950 w-full h-screen absolute inset-0 flex items-center justify-center bg-opacity-50">
+          <div className="w-[25%] h-auto bg-white rounded-lg p-6 dark:bg-gray-700">
 
-            <div className="flex flex-col">
-              <label htmlFor="name" className="bg-gray-100 border-b border-gray-300 p-1 text-xs text-gray-400 font-medium
-              dark:bg-neutral-600 dark:border-neutral-800">
-                NAME
-              </label>
-
-              <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)}
-              className="dark:bg-neutral-700 dark:text-white"/>
+            <div className="flex items-center justify-between mb-5">
+                <h1 className="text-xl dark:text-white">Add Drone</h1>
+                <button className="px-2 rounded-lg text-lg text-gray-500 hover:bg-gray-200 hover:text-black
+                dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800"
+                        onClick={() => setIsOpen(false)}>
+                  X
+                </button>
             </div>
 
-            <div className="flex flex-col">
+            <form onSubmit={handleSubmit}>
 
-              <label htmlFor="ip" className="bg-gray-100 border-b border-gray-300 p-1 text-xs text-gray-400 font-medium
-              dark:bg-neutral-600 dark:border-neutral-800">
-                IP ADDRESS
-              </label>
+              <div className="flex flex-col">
+                <label htmlFor="name" className={formLabelStyle}>
+                  Drone Name
+                </label>
 
-              <input type="text" id="ip" name="ip" value={ip} onChange={(e) => setIp(e.target.value)}
-              className="dark:bg-neutral-700 dark:text-white"/>
+                <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)}
+                className={formInputStyle} placeholder="My Drone"/>
+              </div>
 
-              {error && <small className="py-1 text-red-500 text-xs font-semibold">{error}</small>}
+              <div className="flex flex-col">
+                <label htmlFor="ip" className={formLabelStyle}>
+                  IP Address
+                </label>
+
+                <input type="text" id="ip" name="ip" value={ip} onChange={(e) => setIp(e.target.value)}
+                className={formInputStyle} placeholder="192.168.1.1"/>
+
+                {error && <small className="py-1 mb-2 text-red-600 text-xs dark:text-red-500">{error}</small>}
             </div>
 
-            <button type="submit" className=" mt-2 bg-[#6466f0] text-white py-1 px-5 rounded-lg text-sm hover:scale-105">Add</button>
+            <button type="submit" className="w-full bg-blue-700 text-white p-1 mt-2 rounded-lg hover:bg-blue-800
+            dark:bg-blue-600 dark:hover:bg-blue-700">
+              Add Drone
+            </button>
 
-          </form>
+            </form>
+
+          </div>
         </div>
-      </Popup>
+      )}
     </div>
   );
 };
