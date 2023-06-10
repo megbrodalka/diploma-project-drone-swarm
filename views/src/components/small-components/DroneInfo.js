@@ -43,7 +43,8 @@ const DroneInfo = ({ drone, onDelete }) => {
                 <div className="bg-gray-950 w-full h-screen absolute inset-0 flex items-center justify-center bg-opacity-50">
                     <div className="sm:w-2/3 md:w-1/3 lg:w-1/4 xl:w-1/5 h-auto bg-white rounded-lg p-6 dark:bg-gray-700">
                         <h1 className="text-center white mb-2 text-gray-500 dark:text-gray-400">
-                            Are you sure you want to delete this drone?
+                            Are you sure you want to delete this drone?<br />
+                            <span className="font-semibold">This action cannot be undone.</span>
                         </h1>
 
                         <div className="flex">
@@ -51,7 +52,7 @@ const DroneInfo = ({ drone, onDelete }) => {
                                 onClick={handleDelete}
                                 className="mx-3 w-full bg-red-600 text-white p-1.5 mt-2 rounded-lg hover:bg-red-700
                                 ">
-                                Yes, I'm sure
+                                Delete
                             </button>
 
                             <button
@@ -59,7 +60,7 @@ const DroneInfo = ({ drone, onDelete }) => {
                                 className="mx-3 w-full bg-white text-gray-600 border border-gray-200 p-1 mt-2 rounded-lg
                                  hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300
                                  dark:hover:bg-gray-600">
-                                No, cancel
+                                Go back
                             </button>
                         </div>
 
