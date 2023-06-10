@@ -9,13 +9,12 @@ import LiveFeed from "./components/page-components/LiveFeed";
 import Settings from "./components/page-components/Settings";
 import {ThemeProvider} from "./components/small-components/Theme";
 
-
 const App = () => {
     return (
         <ThemeProvider>
             <Router>
               <div className="w-screen h-screen dark:bg-[#111827]">
-                <Navigation />
+                  <Navigation />
                 <Routes>
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/control" element={<Control />} />
