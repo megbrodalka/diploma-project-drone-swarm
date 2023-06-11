@@ -1,14 +1,16 @@
 import uvicorn
-import cv2  # python3 -m pip install --force-reinstall --no-cache -U opencv-python==4.5.5.62
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
 from typing import List
 from fastapi import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 from djitellopy import TelloSwarm
 from starlette.responses import StreamingResponse
 
+from backend.models import Drone
+from backend.video_camera import VideoCamera
+
 app = FastAPI()
+camera = VideoCamera()
 swarm = None
 
 # Configure CORS
@@ -19,27 +21,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-class Drone(BaseModel):
-    id: int = 0
-    name: str
-    ip: str
-    status: str = "Landed"
-    battery: str = "100%"
-
-class VideoCamera:
-    def __init__(self):
-        self.video = cv2.VideoCapture(0)
-
-    def __del__(self):
-        self.video.release()
-
-    def get_frame(self):
-        ret, frame = self.video.read()
-        ret, jpeg = cv2.imencode('.jpg', frame)
-        return jpeg.tobytes()
-
 
 drones = [
     Drone(id=1, name="Drone 1", ip="192.168.1.1", status="Landed", battery="100%"),
@@ -52,6 +33,7 @@ drones = [
 ]
 
 drone_id_counter = len(drones)
+
 
 @app.post("/api/drones", response_model=Drone)
 def create_drone(drone: Drone):
@@ -95,16 +77,27 @@ def connect_drones(data: dict):
     return {"message": "Success"}
 
 
-def generate_frames(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-
 @app.get("/api/live_feed")
 async def live_feed():
-    return StreamingResponse(generate_frames(VideoCamera()),
-                    media_type='multipart/x-mixed-replace; boundary=frame')
+    return StreamingResponse(camera.generate_frames(),
+                             media_type='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.get("/api/start_stream")
+async def start_stream():
+    if camera.video is None:
+        camera.start_streaming()
+        return {"message": "Stream started"}
+    else:
+        return {"message": "Stream already running"}
+
+
+@app.get("/api/stop_stream")
+async def stop_stream():
+    if camera.video is not None:
+        camera.stop_streaming()
+    return {"message": "Stream stopped"}
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
