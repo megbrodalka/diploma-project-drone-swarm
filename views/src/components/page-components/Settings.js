@@ -40,14 +40,26 @@ const Settings = () => {
                         theme === 'dark'
                           ? 'after:content-[""] after:border-white after:translate-x-full'
                           : ''
-                      }`}
-                    ></span>
+                        }`}>
+                    </span>
                   </div>
                   <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
                     {toggleText}
                   </span>
                 </label>
+            </div>
 
+            {/*Notifications ----------- */}
+
+            {/*Line Break*/}
+            <div className="relative flex py-4 items-center">
+                <div className="w-full border-b border-gray-300 dark:border-gray-700"></div>
+            </div>
+
+            <div className="notifications">
+                <h1 className="text-stone-700 text-lg mb-3 dark:text-gray-300">
+                    Notifications
+                </h1>
             </div>
 
         </div>
