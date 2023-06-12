@@ -19,8 +19,8 @@ const AddDrone = ({ onAddDrone }) => {
       setError('Invalid IP format');
     } else {
       setError('');
-      onAddDrone(name.toString(), ip.toString());
       setIsOpen(false);
+      onAddDrone(name.toString(), ip.toString());
     }
   };
 

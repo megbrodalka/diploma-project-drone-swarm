@@ -10,6 +10,7 @@ const DroneInfo = ({ drone, onDelete }) => {
 
     const handleDelete = () => {
         onDelete(drone.id);
+        toggleDeletePopup();
     };
 
     const toggleDeletePopup = () => {

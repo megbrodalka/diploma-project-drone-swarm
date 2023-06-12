@@ -3,6 +3,7 @@ import DroneInfo  from './DroneInfo';
 import axios from 'axios';
 import AddDrone from "./AddDrone";
 import Connect from "./Connect";
+import ErrorPopup from "./ErrorPopup";
 
 const port = "http://127.0.0.1:8000"
 
@@ -11,17 +12,23 @@ const ViewAllDrones = () => {
     // The initial value of drones is an empty array
     // The useState returns an array with two elements, drones and setDrones
     const [drones, setDrones] = useState([]);
+    const [error, setError] = useState([]);
 
     // Used to fetch the drone data and update the drones state
     useEffect(() => {
         fetchDrones();
     }, []);
 
+    const clearError = () => {
+        setError([]);
+    };
+
     const fetchDrones = async () => {
         try {
             const response = await axios.get(`${port}/api/drones`);
             setDrones(response.data);
         } catch (error) {
+            setError(["Error fetching drones", error.name, error.message]);
             console.error("Error fetching drones: ", error);
         }
     }
@@ -33,6 +40,7 @@ const ViewAllDrones = () => {
             const newDrone = response.data;
             setDrones((prevDrones) => [...prevDrones, newDrone]);
         } catch (error) {
+            setError(["Error adding drone", error.name, error.message]);
             console.error("Error adding drone: ", error);
         }
     }
@@ -42,6 +50,7 @@ const ViewAllDrones = () => {
             await axios.delete(`${port}/api/drones/${id}`);
             setDrones((prevDrones) => prevDrones.filter((drone) => drone.id !== id));
         } catch (error) {
+            setError(["Error deleting drone", error.name, error.message]);
             console.error("Error deleting drone: ", error);
         }
     }
@@ -51,6 +60,10 @@ const ViewAllDrones = () => {
 
     return (
         <div className="m-8">
+
+            {error.length > 0 && (
+                <ErrorPopup title={error[0]} message={error[1]} info={error[2]} onClose={clearError} />
+            )}
 
             <div className="flex items-center justify-between mb-4">
                 <h1 className="font-semibold text-xl text-stone-700 dark:text-white">Dashboard</h1>
