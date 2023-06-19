@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Navigation from './components/small-components/Navigation'
 
 import Dashboard from "./components/page-components/Dashboard";
-import Control from "./components/page-components/Control";
-import LiveFeed from "./components/page-components/LiveFeed";
+import Missions from "./components/page-components/Missions";
 import Settings from "./components/page-components/Settings";
 import {ThemeProvider} from "./components/small-components/Theme";
 
@@ -17,8 +16,7 @@ const App = () => {
                   <Navigation />
                 <Routes>
                   <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/control" element={<Control />} />
-                  <Route path="/livefeed" element={<LiveFeed />} />
+                  <Route path="/missions" element={<Missions />} />
                   <Route path="/settings" element={<Settings />} />
                 </Routes>
               </div>

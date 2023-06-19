@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/drone-logo.png';
-import Notifications from "./Notifications";
 
 const Navigation = () => {
     const navTextStyle = 'text-stone-700 p-1 m-2 text-gray-200 hover:text-blue-600 font-medium text-sm ' +
@@ -23,12 +22,8 @@ const Navigation = () => {
                   Dashboard
                 </Link>
 
-                <Link to='/control' className={navTextStyle}>
-                  Control
-                </Link>
-
-                <Link to='/livefeed' className={navTextStyle}>
-                  Live Feed
+                <Link to='/missions' className={navTextStyle}>
+                  Missions
                 </Link>
 
                 <Link to='/settings' className={navTextStyle}>
@@ -36,7 +31,6 @@ const Navigation = () => {
                 </Link>
               </div>
 
-              <Notifications />
             </div>
         </nav>
     );

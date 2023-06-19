@@ -23,13 +23,14 @@ app.add_middleware(
 )
 
 drones = [
-    Drone(id=1, name="Drone 1", ip="192.168.1.1", status="Landed", battery="100%"),
-    Drone(id=2, name="Drone 2", ip="192.168.1.2", status="Flying", battery="50%"),
-    Drone(id=3, name="Drone 3", ip="192.168.1.3", status="Flying", battery="40%"),
-    Drone(id=4, name="Drone 4", ip="192.168.1.4", status="Landed", battery="90%"),
-    Drone(id=5, name="Drone 5", ip="192.168.1.5", status="Landed", battery="50%"),
-    Drone(id=6, name="Drone 6", ip="192.168.1.6", status="Flying", battery="60%"),
-    Drone(id=7, name="Drone 7", ip="192.168.1.7", status="Landed", battery="70%"),
+    Drone(id=1, name="Drone 1", ip="10.25.35.130", status="Landed", battery="100%"),
+    Drone(id=1, name="Drone 2", ip="10.25.35.130", status="Flying", battery="100%"),
+    # Drone(id=2, name="Drone 2", ip="192.168.1.2", status="Flying", battery="50%"),
+    # Drone(id=3, name="Drone 3", ip="192.168.1.3", status="Flying", battery="40%"),
+    # Drone(id=4, name="Drone 4", ip="192.168.1.4", status="Landed", battery="90%"),
+    # Drone(id=5, name="Drone 5", ip="192.168.1.5", status="Landed", battery="50%"),
+    # Drone(id=6, name="Drone 6", ip="192.168.1.6", status="Flying", battery="60%"),
+    # Drone(id=7, name="Drone 7", ip="192.168.1.7", status="Landed", battery="70%"),
 ]
 
 drone_id_counter = len(drones)
@@ -57,7 +58,11 @@ def get_drone(drone_id: int):
     raise HTTPException(status_code=404, detail="Drone not found")
 
 
-# Patch for updating battery, status
+# Patch for updating battery, isFlying status
+@app.patch("/api/drones/{drone_id}/battery")
+def get_battery(drone_id: int):
+    pass
+
 
 @app.delete("/api/drones/{drone_id}")
 def delete_drone(drone_id: int):
@@ -74,6 +79,13 @@ def connect_drones(data: dict):
     ips = data.get('ips')
     swarm = TelloSwarm.fromIps(ips)
     swarm.connect()
+    return {"message": "Success"}
+
+
+@app.post("/api/disconnect")
+async def disconnect_drones():
+    global swarm
+    swarm.end()
     return {"message": "Success"}
 
 
@@ -97,6 +109,20 @@ async def stop_stream():
     if camera.video is not None:
         camera.stop_streaming()
     return {"message": "Stream stopped"}
+
+
+@app.post("/api/takeoff")
+async def takeoff():
+    global swarm
+    swarm.takeoff()
+    return {"message": "Take off success"}
+
+
+@app.post("/api/land")
+async def land():
+    global swarm
+    swarm.land()
+    return {"message": "Land success"}
 
 
 if __name__ == "__main__":
